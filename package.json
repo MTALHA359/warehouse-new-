@@ -1,0 +1,41 @@
+{
+  "name": "warehouse-new-",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@shadcn/ui": "^0.0.4",
+    "axios": "^1.10.0",
+    "chart.js": "^4.5.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "html5-qrcode": "^2.3.8",
+    "jspdf": "^3.0.1",
+    "lucide-react": "^0.525.0",
+    "mongoose": "^8.16.1",
+    "next": "14.2.29",
+    "next-auth": "^4.24.11",
+    "papaparse": "^5.5.3",
+    "react": "^18",
+    "react-chartjs-2": "^5.3.0",
+    "react-dom": "^18",
+    "react-hot-toast": "^2.5.2",
+    "react-icons": "^5.5.0",
+    "react-pdf": "^10.0.1",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss-animate": "^1.0.7",
+    "xlsx": "^0.18.5",
+    "zustand": "^5.0.6"
+  },
+  "devDependencies": {
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1"
+  }
+}

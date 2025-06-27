@@ -1,0 +1,55 @@
+// ✅ src/app/api/dashboard/summary/route.js
+import { NextResponse } from "next/server";
+import { dbConnect } from "@/lib/dbConnect";
+import Sale from "@/models/Sale";
+import Expense from "@/models/Expense";
+import Product from "@/models/Product";
+
+export async function GET() {
+  await dbConnect();
+
+  try {
+    const sales = await Sale.find({});
+    const expenses = await Expense.find({});
+    const products = await Product.find({});
+
+    const totalSales = sales.reduce((acc, sale) => acc + sale.totalAmount, 0);
+    const totalExpenses = expenses.reduce((acc, ex) => acc + ex.amount, 0);
+    const totalPurchases = 0; // Placeholder
+    const profit = totalSales - totalExpenses - totalPurchases;
+
+    const lowStock = products.filter((p) => p.quantity <= p.lowStockLimit);
+
+    const topProductsMap = {};
+    sales.forEach((sale) => {
+      sale.products.forEach((item) => {
+        if (!topProductsMap[item.name])
+          topProductsMap[item.name] = item.quantity;
+        else topProductsMap[item.name] += item.quantity;
+      });
+    });
+
+    const topProducts = Object.entries(topProductsMap)
+      .map(([name, qty]) => ({ name, qty }))
+      .sort((a, b) => b.qty - a.qty)
+      .slice(0, 5);
+
+    return NextResponse.json({
+      success: true,
+      data: {
+        totalSales,
+        totalExpenses,
+        profit,
+        lowStockCount: lowStock.length,
+        topProducts,
+      },
+    });
+  } catch (err) {
+    console.error("Dashboard summary error:", err);
+    return NextResponse.json(
+      { success: false, message: "Server error" },
+      { status: 500 }
+    );
+  }
+}
+
