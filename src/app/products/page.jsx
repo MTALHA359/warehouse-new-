@@ -111,7 +111,7 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import Sidebar from '@/components/custom/Sidebar';
+import Sidebar from '@/components/Sidebar';
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
 <Sidebar/>
